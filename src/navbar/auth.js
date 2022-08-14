@@ -12,16 +12,32 @@ function Auth() {
 
     return (
         <>
-            <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/">Home</Link>
+
+            <nav className="flex justify-between items-center m-7">
+                <a href="/"
+                ><img className="w-24" src="logo.png" alt=""
+                    /></a>
+                <ul className="flex space-x-6 mr-6 text-lg">
+                    <li>
+                        <span class="font-bold upppercase hover:text-green-500">
+
+                            <Link className="no-underline hover:text-green-500" to="/">Welcome User</Link>
+                        </span>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/dashboard">Dashboard</Link>
+                    <li>
+                        <Link className="no-underline hover:text-green-500" to="/dashboard"><i class="fa-solid fa-plus mr-1"></i>
+                            Upload Problems</Link>
+
                     </li>
-                    <li className="nav-item">
-                        <span role="button" className="nav-link" onClick={logoutUser}>Logout</span>
+                    <li>
+                        <Link className="no-underline hover:text-green-500" to="/dashboard"><i class="fa-solid fa-gear mr-1"></i>
+                            Manage Problems</Link>
+
+                    </li>
+                    <li>
+                        <button class="hover:text-red-500" style={{ cursor: "pointer" }} onClick={logoutUser}>
+                            <i class="fa-solid fa-door-closed"></i> Logout
+                        </button>
                     </li>
 
                 </ul>

@@ -9,8 +9,17 @@ export default function Login() {
     const submitForm = () => {
         // api call
         http.post('/auth/login', { email: email, password: password }).then((res) => {
-            setToken(res.data.user, res.data.token);
+            if (res.data.status === true) {
+                setToken(res.data.user, res.data.token);
+                console.log(res.data.user);
+            } else {
+                console.log(res.data);
+            }
 
+
+
+        }, (err) => {
+            console.log(err);
         })
     }
 

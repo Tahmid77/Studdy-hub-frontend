@@ -3,15 +3,17 @@ import AuthUser from './AuthUser';
 
 export default function Dashboard() {
     const { http } = AuthUser();
-    const [userdetail, setUserdetail] = useState('');
+    const [userdetail, setUserdetail] = useState([]);
 
     useEffect(() => {
         fetchUserDetail();
     }, []);
 
     const fetchUserDetail = () => {
-        http.post('/adminOperations/user').then((res) => {
-            setUserdetail(res.data);
+        http.get('/adminOperations/user').then((res) => {
+            setUserdetail(res.data.users);
+        }, (err) => {
+            console.log(err);
         });
     }
 
@@ -19,9 +21,9 @@ export default function Dashboard() {
         if (userdetail) {
             return <div>
                 <h4>Name</h4>
-                <p>{userdetail.name}</p>
+                <p>{userdetail[0].name}</p>
                 <h4>Email</h4>
-                <p>{userdetail.email}</p>
+                <p>{userdetail[2].name}</p>
             </div>
         } else {
             return <p>Loading.....</p>
