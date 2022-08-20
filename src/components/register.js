@@ -17,7 +17,7 @@ export default function Register() {
     }
 
     return (
-        <div className="row justify-content-left pt-5">
+        <div className="row justify-content-center pt-5">
             <div className="col-sm-6">
                 <div className="card p-4">
                     <h1 className="text-center mb-3">Register </h1>
@@ -40,7 +40,7 @@ export default function Register() {
                             onChange={e => setPassword(e.target.value)}
                             id="pwd" />
                     </div>
-                    <button type="button" onClick={submitForm} className="btn btn-primary mt-4">Register</button>
+                    <button type="button" onClick={submitForm} className="mt-4 bg-green-500 text-white rounded py-2 px-4 hover:bg-black">Register</button>
                 </div>
             </div>
         </div>

@@ -40,7 +40,7 @@ export default function Login() {
                             onChange={e => setPassword(e.target.value)}
                             id="pwd" />
                     </div>
-                    <button type="button" onClick={submitForm} className="btn btn-primary mt-4">Login</button>
+                    <button type="button" onClick={submitForm} className="mt-4 bg-green-500 text-white rounded py-2 px-4 hover:bg-black">Login</button>
                 </div>
             </div>
         </div>

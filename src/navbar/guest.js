@@ -6,18 +6,23 @@ import Register from '../components/register';
 function Guest() {
     return (
         <>
-            <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/">Home</Link>
+            <nav className="flex justify-between items-center m-7">
+                <a href="/"
+                ><img className="w-24" src="logo.png" alt=""
+                    /></a>
+                <ul className="flex space-x-6 mr-6 text-lg">
+                    <li>
+                        <span class="font-bold upppercase hover:text-green-500">
+                            <Link className="no-underline hover:text-green-500" to="/">Home</Link>
+                        </span>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/login">Login</Link>
+                    <li>
+                        <Link className="no-underline hover:text-green-500" to="/login">Login</Link>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/register">Register</Link>
-                    </li>
+                    <li>
+                        <Link className="no-underline hover:text-green-500" to="/register">Register</Link>
 
+                    </li>
                 </ul>
 
             </nav>
@@ -28,6 +33,11 @@ function Guest() {
                     <Route path="/register" element={<Register />} />
                 </Routes>
             </div>
+            <footer
+                className="absolute bottom-0 w-full flex items-center justify-start font-bold bg-slate-900 text-white h-24 opacity-90 md:justify-center"
+            >
+                <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
+            </footer>
         </>
     );
 }

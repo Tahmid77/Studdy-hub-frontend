@@ -14,7 +14,7 @@ function Auth() {
         <>
 
             <nav className="flex justify-between items-center m-7">
-                <a href="/"
+                <a href="/dashboard"
                 ><img className="w-24" src="logo.png" alt=""
                     /></a>
                 <ul className="flex space-x-6 mr-6 text-lg">
@@ -48,7 +48,13 @@ function Auth() {
                     <Route path="/" element={<Home />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                 </Routes>
+
             </div>
+            <footer
+                className="w-full flex items-center justify-start font-bold bg-slate-900 text-white h-24 opacity-90 md:justify-center mt-3"
+            >
+                <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
+            </footer>
         </>
     );
 }

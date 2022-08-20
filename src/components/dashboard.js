@@ -1,32 +1,31 @@
 import { useEffect, useState } from 'react';
 import AuthUser from './AuthUser';
+import Posts from './posts';
 
 export default function Dashboard() {
     const { http } = AuthUser();
-    const [userdetail, setUserdetail] = useState([]);
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetchUserDetail();
+        fetchPosts();
     }, []);
 
-    const fetchUserDetail = () => {
-        http.get('/adminOperations/user').then((res) => {
-            setUserdetail(res.data.users);
+    const fetchPosts = () => {
+        http.get('/posts/all').then((res) => {
+            console.log(res.data);
+            setPosts(res.data);
         }, (err) => {
             console.log(err);
         });
     }
 
     function renderElement() {
-        if (userdetail) {
-            return <div>
-                <h4>Name</h4>
-                <p>{userdetail[0].name}</p>
-                <h4>Email</h4>
-                <p>{userdetail[2].name}</p>
+        if (posts) {
+            return <div class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4">
+                {posts.map(post => <Posts key={post.id} post={post} />)}
             </div>
         } else {
-            return <p>Loading.....</p>
+            return <h1>Loading.....</h1>
         }
 
     }
