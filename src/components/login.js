@@ -2,7 +2,7 @@ import { useState } from "react"
 import AuthUser from './AuthUser';
 
 export default function Login() {
-    const { http, setToken } = AuthUser();
+    const { http, setToken, setUser } = AuthUser();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
@@ -11,13 +11,10 @@ export default function Login() {
         http.post('/auth/login', { email: email, password: password }).then((res) => {
             if (res.data.status === true) {
                 setToken(res.data.user, res.data.token);
-                console.log(res.data.user);
+                setUser(res.data.user);
             } else {
                 console.log(res.data);
             }
-
-
-
         }, (err) => {
             console.log(err);
         })

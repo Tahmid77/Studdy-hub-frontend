@@ -2,8 +2,15 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Home from '../components/home';
 import Dashboard from '../components/dashboard';
 import AuthUser from '../components/AuthUser';
+import Post from '../components/post';
+import Manage from '../components/manage';
+import { useEffect, useState } from 'react';
+import Upload from '../components/upload';
+import EditProfile from '../components/editProfile';
+import EditProblem from '../components/editProblem';
 function Auth() {
-    const { token, logout } = AuthUser();
+    const { token, logout, http } = AuthUser();
+
     const logoutUser = () => {
         if (token !== undefined) {
             logout();
@@ -21,16 +28,16 @@ function Auth() {
                     <li>
                         <span class="font-bold upppercase hover:text-green-500">
 
-                            <Link className="no-underline hover:text-green-500" to="/">Welcome User</Link>
+                            <Link className="no-underline hover:text-green-500" to="/user">Welcome User</Link>
                         </span>
                     </li>
                     <li>
-                        <Link className="no-underline hover:text-green-500" to="/dashboard"><i class="fa-solid fa-plus mr-1"></i>
+                        <Link className="no-underline hover:text-green-500" to="/upload"><i class="fa-solid fa-plus mr-1"></i>
                             Upload Problems</Link>
 
                     </li>
                     <li>
-                        <Link className="no-underline hover:text-green-500" to="/dashboard"><i class="fa-solid fa-gear mr-1"></i>
+                        <Link className="no-underline hover:text-green-500" to="/problem/manage"><i class="fa-solid fa-gear mr-1"></i>
                             Manage Problems</Link>
 
                     </li>
@@ -45,8 +52,12 @@ function Auth() {
             </nav>
             <div className="container">
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/user" element={<EditProfile />} />
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/problem/details/:id" element={<Post />} />
+                    <Route path="/problem/edit/:pid" element={<EditProblem />} />
+                    <Route path="/problem/manage" element={<Manage />} />
+                    <Route path="/upload" element={<Upload />} />
                 </Routes>
 
             </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Posts = ({ post }) => {
     let tags = post.tags.split(',');
@@ -11,7 +12,7 @@ const Posts = ({ post }) => {
             />
             <div>
                 <h3 className="text-2xl">
-                    <a href="/problems/{{$problem->id}}">{post.title}</a>
+                    <Link to={`/problem/details/${post.id}`}>{post.title}</Link>
                 </h3>
                 <ul className="flex p-0">
                     {tags.map(tag => {

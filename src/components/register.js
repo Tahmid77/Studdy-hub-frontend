@@ -4,15 +4,31 @@ import AuthUser from './AuthUser';
 
 export default function Register() {
     const navigate = useNavigate();
-    const { http, setToken } = AuthUser();
+    const { http } = AuthUser();
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [pic, setPic] = useState();
 
-    const submitForm = () => {
+    const submitForm = (e) => {
         // api call
-        http.post('/auth/register', { email: email, password: password, name: name }).then((res) => {
-            navigate('/login')
+        e.preventDefault();
+        var data = new FormData();
+        data.append("pic", pic, pic.name);
+        data.append("name", name);
+        data.append("email", email);
+        data.append("password", password);
+        console.log(data);
+        http.post('/auth/register', data).then((res) => {
+            if (res.data.status === true) {
+                console.log(res.data);
+                navigate('/login')
+            } else {
+                console.log(res.data);
+            }
+
+        }, (err) => {
+            console.log(err);
         })
     }
 
@@ -25,13 +41,19 @@ export default function Register() {
                         <label>Name:</label>
                         <input type="test" className="form-control" placeholder="Enter name"
                             onChange={e => setName(e.target.value)}
-                            id="email" />
+                            id="name" />
                     </div>
                     <div className="form-group mt-3">
                         <label>Email address:</label>
                         <input type="email" className="form-control" placeholder="Enter email"
                             onChange={e => setEmail(e.target.value)}
                             id="email" />
+                    </div>
+                    <div className="form-group mt-3">
+                        <label>Upload Profile Picture:</label>
+                        <input type="file" className="form-control"
+                            onChange={e => setPic(e.target.files[0])}
+                        />
                     </div>
 
                     <div className="form-group mt-3">
