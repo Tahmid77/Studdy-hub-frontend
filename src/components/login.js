@@ -5,6 +5,7 @@ export default function Login() {
     const { http, setToken, setUser } = AuthUser();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [error, setError] = useState();
 
     const submitForm = () => {
         // api call
@@ -13,6 +14,11 @@ export default function Login() {
                 setToken(res.data.user, res.data.token);
                 setUser(res.data.user);
             } else {
+                setError({
+                    email: res.data.errors.email[0],
+                    password: res.data.errors.password[0]
+                    
+                });
                 console.log(res.data);
             }
         }, (err) => {
@@ -31,12 +37,14 @@ export default function Login() {
                             onChange={e => setEmail(e.target.value)}
                             id="email" />
                     </div>
+                    <div><small className="text-danger">{error?error.email:""}</small></div>
                     <div className="form-group mt-3">
                         <label>Password:</label>
                         <input type="password" className="form-control" placeholder="Enter password"
                             onChange={e => setPassword(e.target.value)}
                             id="pwd" />
                     </div>
+                    <div><small className="text-danger">{error?error.password:""}</small></div>
                     <button type="button" onClick={submitForm} className="mt-4 bg-green-500 text-white rounded py-2 px-4 hover:bg-black">Login</button>
                 </div>
             </div>

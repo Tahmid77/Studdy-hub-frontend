@@ -11,13 +11,23 @@ const Upload = () => {
     const [title, setTitle] = useState();
     const [email, setEmail] = useState();
     const [tags, setTags] = useState();
+    const [error, setError] = useState();
     const [description, setDescription] = useState();
     const submitForm = () => {
         /* API CALL */
         http.post('/posts/create', { title: title, email: email, tags: tags, description: description }).then((res) => {
-            console.log(res.data);
+            if (res.data.status === true) {
+                console.log(res.data);
             navigate('/dashboard');
-        })
+            } else {
+                setError({
+                    email: res.data.errors.email[0],
+                    name: res.data.errors.name[0],
+                    password: res.data.errors.password[0],
+                    
+                });
+            
+        }})
     }
     return (
         <div className="row justify-content-center pt-4">

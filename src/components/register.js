@@ -9,6 +9,7 @@ export default function Register() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [pic, setPic] = useState();
+    const [error, setError] = useState();
 
     const submitForm = (e) => {
         // api call
@@ -24,7 +25,15 @@ export default function Register() {
                 console.log(res.data);
                 navigate('/login')
             } else {
-                console.log(res.data);
+                setError({
+                    email: res.data.errors.email[0],
+                    name: res.data.errors.name[0],
+                    password: res.data.errors.password[0],
+                    
+                });
+                console.log();
+
+               
             }
 
         }, (err) => {
@@ -43,15 +52,17 @@ export default function Register() {
                             onChange={e => setName(e.target.value)}
                             id="name" />
                     </div>
+                    <div><small className="text-danger">{error?error.name:""}</small></div>
                     <div className="form-group mt-3">
                         <label>Email address:</label>
                         <input type="email" className="form-control" placeholder="Enter email"
                             onChange={e => setEmail(e.target.value)}
                             id="email" />
                     </div>
+                    <div><small className="text-danger">{error?error.email:""}</small></div>
                     <div className="form-group mt-3">
                         <label>Upload Profile Picture:</label>
-                        <input type="file" className="form-control"
+                        <input required type="file" className="form-control"
                             onChange={e => setPic(e.target.files[0])}
                         />
                     </div>
@@ -62,6 +73,7 @@ export default function Register() {
                             onChange={e => setPassword(e.target.value)}
                             id="pwd" />
                     </div>
+                    <div><small className="text-danger">{error?error.password:""}</small></div>
                     <button type="button" onClick={submitForm} className="mt-4 bg-green-500 text-white rounded py-2 px-4 hover:bg-black">Register</button>
                 </div>
             </div>
