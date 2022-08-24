@@ -16,18 +16,8 @@ const Upload = () => {
     const submitForm = () => {
         /* API CALL */
         http.post('/posts/create', { title: title, email: email, tags: tags, description: description }).then((res) => {
-            if (res.data.status === true) {
-                console.log(res.data);
             navigate('/dashboard');
-            } else {
-                setError({
-                    email: res.data.errors.email[0],
-                    name: res.data.errors.name[0],
-                    password: res.data.errors.password[0],
-                    
-                });
-            
-        }})
+        })
     }
     return (
         <div className="row justify-content-center pt-4">
@@ -42,12 +32,6 @@ const Upload = () => {
                         <label className="form-label">Title:</label>
                         <input type="text" className="form-control" id="title" placeholder="Enter Title" name="title"
                             onChange={e => setTitle(e.target.value)} />
-                    </div>
-
-                    <div className="mb-3 mt-3">
-                        <label className="form-label">Email:</label>
-                        <input type="email" className="form-control" id="location" placeholder="Enter Email" name="email"
-                            onChange={e => setEmail(e.target.value)} />
                     </div>
 
                     <div className="mb-3">

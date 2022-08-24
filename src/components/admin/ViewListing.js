@@ -1,30 +1,30 @@
 import { useState, useEffect } from "react"
 import AuthUser from '../AuthUser'
-import {Routes, Route, Link} from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 
-export default function ViewListing(){
-    const {http} = AuthUser();
+export default function ViewListing() {
+    const { http } = AuthUser();
     const [listing, setListing] = useState([]);
 
-    useEffect(() =>{
-        fetchListings ();
-    },[]);
+    useEffect(() => {
+        fetchListings();
+    }, []);
 
     const fetchListings = () => {
-        http.get('/Admin/Posts').then(res =>{
-            setListing(res.data);
+        http.get('/Admin/Posts').then(res => {
+            setListing(res.data.posts);
         })
     }
 
     const deleteListing = (id) => {
-        http.delete('/Admin/DeletePost/'+id).then(res =>{
-            fetchListings ();
+        http.delete('/Admin/DeletePost/' + id).then(res => {
+            fetchListings();
         })
     }
 
 
-     
+
     return (
         <div className="mt-3">
             <Link className="inline-block text-success ml-4 mb-4 text-decoration-none" to="/">Back </Link>
@@ -32,7 +32,7 @@ export default function ViewListing(){
             <h2 className="align-items-center text-center text-success mt-3">Tution Listings</h2>
 
             <table className="table align-items-center ">
-                <thead className="text-success"> 
+                <thead className="text-success">
                     <tr>
                         <th>No.</th>
                         <th>Title</th>
@@ -41,27 +41,27 @@ export default function ViewListing(){
                 </thead>
 
                 <tbody>
-                    {listing?( listing.map((listing,index)=>{
-                        return(
+                    {listing ? (listing.map((listing, index) => {
+                        return (
                             <tr key={listing.id}>
-                            <td>{++index}</td>
-                            <td>{listing.title}</td>
-                            <td>
-                                <Link className="btn btn-info" to={{ pathname:"/listing/edit/"+listing.id}}>Edit</Link> &nbsp;
+                                <td>{++index}</td>
+                                <td>{listing.title}</td>
+                                <td>
+                                    <Link className="btn btn-info" to={{ pathname: "/listing/edit/" + listing.id }}>Edit</Link> &nbsp;
 
-                                <button type="button" className="btn btn-danger" 
-                                onClick={() => {deleteListing(listing.id)}}>
-                                Delete
-                                </button>
+                                    <button type="button" className="btn btn-danger"
+                                        onClick={() => { deleteListing(listing.id) }}>
+                                        Delete
+                                    </button>
 
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                         );
-                       
 
-                        })
-                        ): <p>No problems</p>}
-                    
+
+                    })
+                    ) : <p>No problems</p>}
+
 
                 </tbody>
 

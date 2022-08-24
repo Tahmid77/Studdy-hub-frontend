@@ -13,7 +13,7 @@ const Manage = () => {
     }, []);
 
     const fetchPosts = () => {
-        http.get('/posts/all').then((res) => {
+        http.get('/user/posts').then((res) => {
             console.log(res.data);
             setPosts(res.data);
         }, (err) => {
@@ -24,7 +24,7 @@ const Manage = () => {
 
 
     const deleteListing = (id) => {
-        http.delete('/posts/' + id).then(res => {
+        http.delete('/user/posts/' + id).then(res => {
             fetchPosts();
         })
     }
@@ -38,6 +38,8 @@ const Manage = () => {
                     Manage Gigs
                 </h1>
             </header>
+
+            {posts === [] && <p>No Posts</p>}
 
             <table class="w-full table-auto rounded-sm">
                 <tbody>
@@ -67,7 +69,7 @@ const Manage = () => {
                                         class="px-4 py-8 border-t border-b border-gray-300 text-lg"
                                     >
                                         <button type="button" className="btn btn-danger"
-                                            onClick={() => { deleteListing(post.id) }}>
+                                            onClick={() => deleteListing(post.id)}>
                                             Delete
                                         </button>
                                     </td>

@@ -14,7 +14,7 @@ const EditProblem = () => {
     }, []);
 
     const fetchListing = () => {
-        http.get('/listings/' + id + '/edit').then(res => {
+        http.get('/user/posts/' + id).then(res => {
             setInputs({
                 title: res.data.title,
                 location: res.data.location,
